@@ -19,7 +19,6 @@ export const ExpensesSummary = (props) => {
 
 const ConnectedExpensesSummary = connect((state) => {
     const selectedExpenses = getVisibleExpenses(state)
-    console.log(selectedExpenses)
     return {
         expenseCount: selectedExpenses.length,
         expensesTotal: selectExpensesTotal(selectedExpenses)
