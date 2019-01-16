@@ -1,0 +1,6 @@
+heroku config:set FIREBASE_API_KEY=AIzaSyAthdgxfhN-NPwDNxJZhjhhuiAqiXlS0dc
+heroku config:set FIREBASE_AUTH_DOMAIN=expensify-c5a66.firebaseapp.com
+heroku config:set FIREBASE_DATABASE_URL=https://expensify-c5a66.firebaseio.com
+heroku config:set FIREBASE_PROJECT_ID=expensify-c5a66
+heroku config:set FIREBASE_STORAGE_BUCKET=expensify-c5a66.appspot.com
+heroku config:set FIREBASE_MESSAGING_SENDER_ID=45250821111
