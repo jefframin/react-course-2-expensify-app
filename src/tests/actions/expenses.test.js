@@ -1,11 +1,24 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { startAddExpense, addExpenseAction, editExpenseAction, removeExpenseAction } from '../../actions/expenses'
+import { startAddExpense, addExpenseAction, editExpenseAction, removeExpenseAction, setExpenses, startSetExpenses } from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
 import database from '../../firebase/firebase'
 
 const createMockStore = configureMockStore([thunk])
 
+beforeEach((done) => {
+    const expensesData = []
+    /*
+    let count = 0
+    expenses.forEach(({ description, note, amount, created }) => {
+        expensesData[count++] = {description, note, amount, created}
+    })
+    */
+    expenses.forEach(({ id, description, note, amount, created }) => {
+        expensesData[id] = {description, note, amount, created}
+    })
+    database.ref('expenses').set(expensesData).then(() => done())
+})
 
 test('should create remove expense action object', () => {
     const action = removeExpenseAction({ id: 'feh' })
@@ -85,18 +98,22 @@ test('should add expense with defaults to DB and store', (done) => {
     })
 })
 
-/*
-test('should create add expense action object with default values', () => {
-    const action = addExpenseAction()
+test('should set up set expense action object with data', () => {
+    const action = setExpenses(expenses)
     expect(action).toEqual({
-        type: 'ADD_EXPENSE',
-        expense: {
-            description: '',
-            note: '',
-            amount: 0,
-            created: 0,
-            id: expect.any(String)
-        }
+        type: 'SET_EXPENSES',
+        expenses: expenses
     })
 })
-*/
+
+test('should fetch the expenses from firebase', (done) => {
+    const store = createMockStore()
+    store.dispatch(startSetExpenses()).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({
+            type: 'SET_EXPENSES',
+            expenses: expenses
+        })
+        done()
+    })
+})
