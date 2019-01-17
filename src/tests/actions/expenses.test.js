@@ -6,6 +6,7 @@ import { startAddExpense,
          removeExpenseAction, 
          setExpenses, 
          startSetExpenses,
+         startEditExpense,
          startRemoveExpense } from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
 import database from '../../firebase/firebase'
@@ -129,7 +130,6 @@ test('should remove expense from DB', (done) => {
 
     store.dispatch(startRemoveExpense({ id: 1 })).then(() => {
         const actions = store.getActions()
-        console.log("action: " + actions[0])
         expect(actions[0]).toEqual({
             type: 'REMOVE_EXPENSE',
             id: 1
@@ -138,6 +138,31 @@ test('should remove expense from DB', (done) => {
 
     }).then((dbRef) => {
         expect(dbRef.val()).toEqual(null)
+        done()
+    })
+})
+
+test('should edit expense in DB', (done) => {
+    const expenseData = {
+                description: 'new desc',
+                note: 'new note',
+                amount: 1234,
+                created: 23490
+    }
+    const expenseID = 2
+    const store = createMockStore()
+
+    store.dispatch(startEditExpense(expenseID, expenseData)).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({
+            type: 'EDIT_EXPENSE',
+            id: expenseID,
+            updates: expenseData
+        })
+        return database.ref(`expenses/${expenseID}`).once('value')
+
+    }).then((dbRef) => {
+        expect(dbRef.val()).toEqual(expenseData)
         done()
     })
 })
