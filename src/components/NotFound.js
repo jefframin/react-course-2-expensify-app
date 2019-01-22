@@ -6,7 +6,7 @@ const NotFound = () =>{
         <div>
         404!
         <p>
-        <Link to="/">go to dashboard</Link>
+        <Link to="/dashboard">go to dashboard</Link>
         </p>
         </div>
     )

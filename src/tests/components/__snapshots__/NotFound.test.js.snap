@@ -6,7 +6,7 @@ exports[`should render not found page 1`] = `
   <p>
     <Link
       replace={false}
-      to="/"
+      to="/dashboard"
     >
       go to dashboard
     </Link>
