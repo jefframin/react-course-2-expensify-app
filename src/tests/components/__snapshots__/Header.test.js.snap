@@ -25,15 +25,6 @@ exports[`should render header 1`] = `
     </NavLink>
   </p>
   <p>
-    <NavLink
-      activeClassName="is-active"
-      ariaCurrent="true"
-      to="/help"
-    >
-      Help
-    </NavLink>
-  </p>
-  <p>
     <button
       onClick={[Function]}
     >
