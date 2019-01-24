@@ -6,22 +6,17 @@ export class LoginPage extends React.Component {
 
     render() {
       return (
-        <div>
-          <button onClick={this.props.authenticate}>Login</button>
+        <div className="box-layout">
+        <div className="box-layout__box">
+        <h1 className="box-layout__title">Expensify App</h1>
+        <p>A place for your expenses.</p>
+          <button className="button" onClick={this.props.authenticate}>Login with Google</button>
+        </div>
         </div>
     )
     }
 }
 
-/*
-const mapStateToProps = (state, props) => {
-    return {
-        expense: state.expenses.find((expense) => {
-            return expense.id === props.match.params.id
-        }) 
-    }
-}
-*/
 
 const mapDispatchToProps = (dispatch) => {
     return {

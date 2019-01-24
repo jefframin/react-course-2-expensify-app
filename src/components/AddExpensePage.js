@@ -9,28 +9,21 @@ export class AddExpensePage extends React.Component {
             this.props.history.push('/dashboard')
     }
     render() {
-    return (
-        <div>
-        <h1>Add Expense</h1>
-        <ExpenseForm onSubmit={this.onSubmit} />
-        </div>
-    )
+        return (
+            <div>
+                <div className="page-header">
+                    <div className="content-container">
+                        <h1 className="pag-header__title">Add Expense</h1>
+                    </div>
+                </div>
+                <div className="content-container">
+                    <ExpenseForm onSubmit={this.onSubmit} />
+                </div>
+            </div>
+        )
     }
 }
 
-/*
-const AddExpensePage = (props) => {
-    return (
-        <div>
-        <h1>Add Expense</h1>
-        <ExpenseForm onSubmit={(expense) => {
-            props.onSubmit(expense)
-            props.history.push('/')
-        }}/>
-        </div>
-    )
-}
-*/
 
 const mapDispatchToProps = (dispatch) => {
     return {
